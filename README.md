@@ -36,7 +36,7 @@ The total portfolio is defined as a convex combination:
 The Core–Satellite structure separates economic roles:
 
 - **Core**: structural stability under extreme market stress  
-- **Satellite**: controlled exposure to volatile or growth-oriented assets
+- **Satellite**: controlled exposure to volatile or growth-oriented assets  
 
 ---
 
@@ -78,14 +78,38 @@ Only the Core is required to be robust to rare extreme losses.
 
 ---
 
+## Selecting λ: A Tail-Risk–Controlled Decision Policy
+
+The parameter λ controls the fraction of capital allocated to the Satellite portfolio.
+
+Importantly, **λ is not treated as a statistical parameter to be estimated**, but as a **strategic decision parameter** reflecting tolerance to tail risk.
+
+Rather than selecting a single “optimal” value, the project adopts a **policy-based approach**:
+
+1. A grid of λ values is considered (e.g. 0, 0.05, 0.10, …, 0.50).
+2. For each λ, the aggregated portfolio is analyzed using:
+   - rare-event probability estimates,
+   - Monte Carlo Value-at-Risk (VaR),
+   - Monte Carlo Conditional Value-at-Risk (CVaR),
+   - dominant point geometry.
+3. A feasible λ is selected **ex post** based on a predefined tail-risk budget.
+
+A typical decision rule is:
+
+- choose the **largest λ** such that extreme-loss risk (e.g. CVaR at level alpha) remains below an acceptable threshold.
+
+This separation between **risk analysis** and **decision-making** ensures conceptual clarity and avoids conflating preferences with probabilistic structure.
+
+---
+
 ## Risk Analysis
 
 The project analyzes:
 
-- evolution of extreme-loss thresholds as Satellite weight increases,
+- evolution of admissible extreme-loss thresholds as λ increases,
 - Value-at-Risk and Conditional Value-at-Risk of the aggregated portfolio,
-- changes in dominant points as lambda varies,
-- concentration of tail risk between Core and Satellite components.
+- changes in dominant points as Satellite exposure increases,
+- concentration and redistribution of tail risk between Core and Satellite components.
 
 This highlights the **nonlinear interaction between diversification and tail risk**.
 
@@ -97,9 +121,7 @@ This highlights the **nonlinear interaction between diversification and tail ris
 - Small Satellite allocations can significantly alter extreme-loss scenarios.
 - Mean–variance diversification is ineffective against systemic tail risk.
 - Dominant points provide a **geometric diagnostic tool** for portfolio fragility.
-
----
-
+- λ should be treated as a **policy variable**, not an estimable parameter.
 
 ---
 
@@ -124,7 +146,4 @@ It does **not constitute investment advice** and should not be used for real-wor
 ## Author
 
 Marc-Arthur Sébastien Georges  
-Master’s student in Mathematical & Computational Finance  
-Université de Montréal
-
-
+MSc Mathematical & Computational Finance
