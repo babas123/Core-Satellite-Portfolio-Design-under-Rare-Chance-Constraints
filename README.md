@@ -100,5 +100,31 @@ This highlights the **nonlinear interaction between diversification and tail ris
 
 ---
 
-## Project Structure
+
+---
+
+## Technologies Used
+
+- Julia
+- JuMP
+- OSQP
+- Distributions
+- LinearAlgebra
+- Monte Carlo simulation
+
+---
+
+## Disclaimer
+
+This project is **purely academic**.  
+It does **not constitute investment advice** and should not be used for real-world portfolio construction.
+
+---
+
+## Author
+
+Marc-Arthur Sébastien Georges  
+Master’s student in Mathematical & Computational Finance  
+Université de Montréal
+
 
