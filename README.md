@@ -4,10 +4,10 @@
 
 This repository contains a **standalone research project** extending a stochastic optimization framework under **rare chance constraints**, inspired by Tong et al. (2022).
 
-The goal is to study how **tail risk (extreme losses)** can be structurally controlled through a **Core–Satellite portfolio architecture**, where:
+The objective is to study how **tail risk (extreme losses)** can be structurally controlled through a **Core–Satellite portfolio architecture**, where:
 
-- the **Core portfolio** is explicitly protected against rare extreme losses,
-- the **Satellite portfolio** is allowed to take controlled risk in pursuit of higher returns.
+- the **Core portfolio** provides diversification and structural stability,
+- the **Satellite portfolio** introduces controlled concentration in high-growth assets.
 
 This project is **methodological and academic**.  
 It is **not intended as financial advice**.
@@ -21,7 +21,7 @@ Traditional portfolio optimization techniques (mean–variance, maximum return) 
 This project explores:
 
 - how rare-event risk propagates through portfolios,
-- how imposing tail-risk protection **only on the Core** modifies the geometry of extreme losses,
+- how a Core–Satellite structure modifies the feasibility of rare chance constraints,
 - how the **dominant point** (most likely extreme-loss scenario) shifts as Satellite exposure increases.
 
 ---
@@ -35,8 +35,8 @@ The total portfolio is defined as a convex combination:
 
 The Core–Satellite structure separates economic roles:
 
-- **Core**: structural stability under extreme market stress  
-- **Satellite**: controlled exposure to volatile or growth-oriented assets  
+- **Core**: diversification and partial robustness under extreme market stress  
+- **Satellite**: concentrated exposure to thematic or growth-oriented assets  
 
 ---
 
@@ -50,31 +50,26 @@ Portfolio loss is defined as the negative portfolio return.
 
 ---
 
-## Optimization Problem (Core Portfolio)
+## Optimization Framework
 
-The Core portfolio is obtained by solving a **rare chance-constrained optimization problem**:
+The portfolio optimization problem is formulated under a **rare chance constraint**:
 
-- Objective: maximize the admissible extreme-loss threshold
-- Constraint: probability of exceeding this loss remains below a small alpha level
-- Constraints: long-only weights, full investment
+- Objective: maximize expected return
+- Constraint: the probability of exceeding a severe loss threshold remains below a small level α
+- Constraints: long-only weights, full investment, Core–Satellite allocation structure
 
-The problem is solved using a **first-order large deviations approximation**, which:
+The rare chance constraint is enforced using a **first-order large deviations (FORM) approximation**, which:
 
 - avoids brute-force Monte Carlo in rare-event regimes,
-- identifies both the admissible loss threshold and the **dominant point** driving extreme losses.
+- identifies the **dominant point** driving extreme losses.
 
 ---
 
 ## Satellite Portfolio Construction
 
-The Satellite portfolio is **not subject to the chance constraint**.
+The Satellite portfolio represents a **structured exposure to the AI ecosystem**, spanning multiple functional layers such as computation, semiconductors, infrastructure, cloud services, and software platforms.
 
-It is constructed independently using return-oriented criteria such as:
-
-- maximum expected return,
-- concentrated exposure to high-growth assets.
-
-Only the Core is required to be robust to rare extreme losses.
+The Satellite is not designed to be tail-robust, but to introduce controlled concentration whose impact on extreme risk is explicitly analyzed.
 
 ---
 
@@ -82,36 +77,15 @@ Only the Core is required to be robust to rare extreme losses.
 
 The parameter λ controls the fraction of capital allocated to the Satellite portfolio.
 
-Importantly, **λ is not treated as a statistical parameter to be estimated**, but as a **strategic decision parameter** reflecting tolerance to tail risk.
+Importantly, **λ is treated as a strategic decision variable**, not as a statistical parameter to be estimated.
 
-Rather than selecting a single “optimal” value, the project adopts a **policy-based approach**:
+A grid of λ values is analyzed, and feasibility is assessed using:
 
-1. A grid of λ values is considered (e.g. 0, 0.05, 0.10, …, 0.50).
-2. For each λ, the aggregated portfolio is analyzed using:
-   - rare-event probability estimates,
-   - Monte Carlo Value-at-Risk (VaR),
-   - Monte Carlo Conditional Value-at-Risk (CVaR),
-   - dominant point geometry.
-3. A feasible λ is selected **ex post** based on a predefined tail-risk budget.
+- rare-event probability estimates,
+- Monte Carlo VaR and CVaR,
+- dominant point geometry.
 
-A typical decision rule is:
-
-- choose the **largest λ** such that extreme-loss risk (e.g. CVaR at level alpha) remains below an acceptable threshold.
-
-This separation between **risk analysis** and **decision-making** ensures conceptual clarity and avoids conflating preferences with probabilistic structure.
-
----
-
-## Risk Analysis
-
-The project analyzes:
-
-- evolution of admissible extreme-loss thresholds as λ increases,
-- Value-at-Risk and Conditional Value-at-Risk of the aggregated portfolio,
-- changes in dominant points as Satellite exposure increases,
-- concentration and redistribution of tail risk between Core and Satellite components.
-
-This highlights the **nonlinear interaction between diversification and tail risk**.
+The selected λ reflects a predefined tolerance to tail risk.
 
 ---
 
@@ -121,7 +95,7 @@ This highlights the **nonlinear interaction between diversification and tail ris
 - Small Satellite allocations can significantly alter extreme-loss scenarios.
 - Mean–variance diversification is ineffective against systemic tail risk.
 - Dominant points provide a **geometric diagnostic tool** for portfolio fragility.
-- λ should be treated as a **policy variable**, not an estimable parameter.
+- Core–Satellite structures require explicit tail-risk analysis.
 
 ---
 
@@ -139,7 +113,7 @@ This highlights the **nonlinear interaction between diversification and tail ris
 ## Disclaimer
 
 This project is **purely academic**.  
-It does **not constitute investment advice** and should not be used for real-world portfolio construction.
+It does **not constitute investment advice**.
 
 ---
 
