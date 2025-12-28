@@ -1,4 +1,3 @@
-# Core-Satellite-Portfolio-Design-under-Rare-Chance-Constraints
 # Optimization under Rare Chance Constraints  
 ## Systemic Tail Risk Analysis of AI Equity Portfolios
 
@@ -9,9 +8,9 @@ The objective of this work is to analyze **systemic tail risk** in portfolios co
 major Artificial Intelligence (AI) equities, using an optimization framework under **rare
 chance constraints**, inspired by the methodology proposed in **Tong et al. (2022)**.
 
----
 
-## 📌 Project Overview
+
+##  Project Overview
 
 Classical portfolio optimization techniques (mean–variance, maximum return, diversification)
 are known to perform poorly in extreme market conditions.  
@@ -25,15 +24,14 @@ This project investigates tail risk behavior by:
 The analysis focuses deliberately on a **sectorially homogeneous universe (AI equities)** in
 order to isolate and study **systemic risk mechanisms**.
 
----
 
-## 🧠 Methodology
+##  Methodology
 
 ### Modeling assumptions
 - Weekly log-returns modeled as a **multivariate Gaussian distribution**
 - Parameters estimated empirically:
-  - Mean vector \( \mu \)
-  - Covariance matrix \( \Sigma \), estimated using **Ledoit–Wolf shrinkage**
+  - Mean vector
+  - Covariance matrix, estimated using **Ledoit–Wolf shrinkage**
 - Portfolio is **long-only** and fully invested
 
 ### Risk measures
@@ -52,7 +50,7 @@ where \( \alpha \ll 1 \) (e.g. \( 1\% \), \( 10^{-4} \)).
 
 ---
 
-## 📊 Main Results
+##  Main Results
 
 - The **OptVaR portfolio** consistently achieves the highest admissible extreme loss threshold
   \( z^\star \), outperforming classical strategies in tail risk regimes.
