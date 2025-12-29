@@ -1,112 +1,134 @@
-# Core–Satellite Portfolio Optimization under Rare Chance Constraints
+# Core–Satellite Portfolio Design under Rare Chance Constraints
 
 ## Overview
 
-This repository contains a **standalone research project** extending a stochastic optimization framework under **rare chance constraints**, inspired by Tong et al. (2022).
+This repository contains a **standalone research project** investigating portfolio design under **rare chance constraints**, inspired by the large-deviations framework of Tong et al. (2022).
 
-The objective is to study how **tail risk (extreme losses)** can be structurally controlled through a **Core–Satellite portfolio architecture**, where:
+The objective is to analyze how **extreme tail risk** can be structurally controlled through a **Core–Satellite portfolio architecture**, with a particular focus on **policy-driven exposure to a concentrated thematic satellite**.
 
-- the **Core portfolio** provides diversification and structural stability,
-- the **Satellite portfolio** introduces controlled concentration in high-growth assets.
-
-This project is **methodological and academic**.  
+The project adopts an **academic and methodological perspective**.  
 It is **not intended as financial advice**.
 
 ---
 
-## Core Idea
+## Core Motivation
 
-Traditional portfolio optimization techniques (mean–variance, maximum return) focus on **average behavior** and are largely blind to **systemic tail risk**.
+Traditional portfolio optimization methods (mean–variance, maximum return) focus on **average outcomes** and often fail to capture **systemic tail risk**, especially under concentrated exposures.
 
-This project explores:
+This project addresses the following questions:
 
-- how rare-event risk propagates through portfolios,
-- how a Core–Satellite structure modifies the feasibility of rare chance constraints,
-- how the **dominant point** (most likely extreme-loss scenario) shifts as Satellite exposure increases.
+- How does rare-event risk propagate in a Core–Satellite portfolio?
+- How does increasing satellite exposure affect the **feasibility of tail-risk constraints**?
+- Can extreme-loss behavior be understood through **geometric diagnostics** rather than pointwise risk measures?
 
 ---
 
-## Portfolio Decomposition
+## Core–Satellite Portfolio Structure
 
 The total portfolio is defined as a convex combination:
 
-- Core weight: (1 − λ)  
-- Satellite weight: λ  
+- **Core weight**: 1 − λ  
+- **Satellite weight**: λ
 
-The Core–Satellite structure separates economic roles:
+This separation reflects distinct economic roles:
 
-- **Core**: diversification and partial robustness under extreme market stress  
-- **Satellite**: concentrated exposure to thematic or growth-oriented assets  
+- **Core portfolio**  
+  Provides diversification and structural stability under normal and stressed conditions.
+
+- **Satellite portfolio**  
+  Introduces intentional concentration in a high-growth thematic segment, whose tail-risk impact is explicitly analyzed rather than diversified away.
 
 ---
 
 ## Risk Modeling Framework
 
-- Asset returns are modeled using a **multivariate Gaussian distribution**
+- Asset returns are modeled using a **multivariate Gaussian reference distribution**
 - Mean vector and covariance matrix are estimated from historical data
-- Covariance estimation uses **Ledoit–Wolf shrinkage** for numerical stability
+- Covariance estimation relies on **Ledoit–Wolf shrinkage** to ensure numerical robustness
 
 Portfolio loss is defined as the negative portfolio return.
 
 ---
 
-## Optimization Framework
+## Rare Chance–Constrained Optimization
 
-The portfolio optimization problem is formulated under a **rare chance constraint**:
+The portfolio design problem is studied under a **rare chance constraint**:
 
 - Objective: maximize expected return
-- Constraint: the probability of exceeding a severe loss threshold remains below a small level α
-- Constraints: long-only weights, full investment, Core–Satellite allocation structure
+- Constraint:  
+  P(Loss ≥ L) ≤ α  
+  where:
+  - L is a severe loss threshold
+  - α is a small probability level
+- Constraints: long-only weights, full investment, fixed Core–Satellite structure
 
-The rare chance constraint is enforced using a **first-order large deviations (FORM) approximation**, which:
+To evaluate rare-event feasibility, the constraint is approximated using a **first-order large-deviations (FORM) method**, which:
 
-- avoids brute-force Monte Carlo in rare-event regimes,
-- identifies the **dominant point** driving extreme losses.
-
----
-
-## Satellite Portfolio Construction
-
-The Satellite portfolio represents a **structured exposure to the AI ecosystem**, spanning multiple functional layers such as computation, semiconductors, infrastructure, cloud services, and software platforms.
-
-The Satellite is not designed to be tail-robust, but to introduce controlled concentration whose impact on extreme risk is explicitly analyzed.
+- avoids brute-force Monte Carlo in extreme regimes,
+- identifies the **dominant point** (most likely extreme-loss scenario),
+- provides a geometric interpretation of tail risk.
 
 ---
 
-## Selecting λ: A Tail-Risk–Controlled Decision Policy
+## Satellite Portfolio Design
 
-The parameter λ controls the fraction of capital allocated to the Satellite portfolio.
+The Satellite portfolio represents a **structured exposure to the AI ecosystem**, covering multiple functional layers such as:
 
-Importantly, **λ is treated as a strategic decision variable**, not as a statistical parameter to be estimated.
+- semiconductors and computation,
+- infrastructure and networking,
+- cloud platforms and enterprise software.
 
-A grid of λ values is analyzed, and feasibility is assessed using:
+The Satellite is **not designed to be tail-robust**.  
+Its purpose is to introduce controlled concentration and study how such exposure reshapes extreme-loss behavior.
 
-- rare-event probability estimates,
-- Monte Carlo VaR and CVaR,
-- dominant point geometry.
+---
 
-The selected λ reflects a predefined tolerance to tail risk.
+## λ as a Policy-Controlled Exposure Parameter
+
+The satellite weight λ is treated as a **strategic decision variable**, not as an optimizable parameter.
+
+A grid of λ values is analyzed, and feasibility is assessed through:
+
+- rare-event probability estimates (FORM and Monte Carlo),
+- tail severity metrics (VaR and CVaR),
+- **dominant-point geometry and large-deviation diagnostics**.
+
+Rather than selecting a single optimal portfolio, the analysis identifies **risk regimes** (Safe, Transition, Fragile) that guide admissible satellite exposure.
+
+---
+
+## Sensitivity Analysis over the Loss Threshold
+
+The robustness of policy rules is evaluated across multiple loss thresholds L.
+
+Key findings include:
+
+- probability-based constraints lose discriminative power as L increases,
+- CVaR-based rules remain informative but become binding abruptly,
+- **large-deviation geometry provides early warning signals** of fragility before classical constraints activate.
+
+This highlights the importance of complementing tail-risk constraints with structural diagnostics.
 
 ---
 
 ## Key Insights
 
-- Tail risk is **not additive** across portfolio components.
-- Small Satellite allocations can significantly alter extreme-loss scenarios.
-- Mean–variance diversification is ineffective against systemic tail risk.
-- Dominant points provide a **geometric diagnostic tool** for portfolio fragility.
-- Core–Satellite structures require explicit tail-risk analysis.
+- Tail risk is **structural and non-additive**.
+- Small satellite allocations can trigger large shifts in extreme-loss scenarios.
+- Mean–variance diversification does not protect against rare systemic events.
+- Dominant points offer a **geometric lens** on portfolio fragility.
+- Core–Satellite portfolios require **policy-based exposure control**, not pointwise optimization.
 
 ---
 
 ## Technologies Used
 
-- Julia
-- JuMP
-- OSQP
-- Distributions
-- LinearAlgebra
-- Monte Carlo simulation
+- Julia  
+- JuMP  
+- OSQP  
+- Distributions  
+- LinearAlgebra  
+- Monte Carlo simulation  
 
 ---
 
@@ -114,10 +136,3 @@ The selected λ reflects a predefined tolerance to tail risk.
 
 This project is **purely academic**.  
 It does **not constitute investment advice**.
-
----
-
-## Author
-
-Marc-Arthur Sébastien Georges  
-MSc Mathematical & Computational Finance
