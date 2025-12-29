@@ -131,7 +131,10 @@ This highlights the importance of complementing tail-risk constraints with struc
 - Monte Carlo simulation  
 
 ---
+## Research Paper
 
+📄 **Full paper (PDF)**  
+[Core–Satellite Portfolio Design under Rare Chance Constraints](report/Core_Satellite_Portfolio_Design_under_Rare_Chance_Constraints.pdf)
 ## Disclaimer
 
 This project is **purely academic**.  
